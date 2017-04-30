@@ -19,12 +19,20 @@ summify (n:xs) = n + summify xs
 summify' :: (Num a) => [a] -> a
 summify' = foldl (+) 0
 
+-- Fold right without starting value
+summify2 :: (Num a) => [a] -> a
+summify2 = foldr1 (+)
+
 -- Guards
 chain :: (Integral a) => a -> [a]
 chain 1 = [1]
 chain n
     | even n =  n:chain (n `div` 2)
     | odd n  =  n:chain (n*3 + 1)
+
+-- Using $ operator
+numLongChains2 :: Int
+numLongChains2 = length $ filter (\xs -> length xs > 15) $ map chain [1..100]
 
 -- Testing out chain
 numLongChains :: Int
